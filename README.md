@@ -1,29 +1,13 @@
 # twitch-dashboard
 
-This template should help get you started developing with Vue 3 in Vite.
+Simple API interfacing app to display a user's stats about their twitch.tv channel
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## CREDITS:
 
-## Customize configuration
+Pagination component built and customized based off of the tutorial below
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+AUTHOR: Filipa Lacerda
+LINK: https://www.digitalocean.com/community/tutorials/vuejs-vue-pagination-component
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+ACCESSED: 06-14-2022

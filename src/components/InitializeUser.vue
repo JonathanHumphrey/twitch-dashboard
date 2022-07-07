@@ -40,6 +40,7 @@ export default {
 
       setTimeout(() => {
         store.fetchFollows();
+        store.fetchSubs();
       }, 500);
     },
   },
@@ -48,10 +49,12 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .wrapper {
   margin-bottom: 5rem;
-  width: 12rem;
+  width: 10rem;
+  position: static;
+  left: 0;
 }
 .link-button {
   text-decoration: none;

@@ -8,8 +8,8 @@ import InitializeUser from "./components/InitializeUser.vue";
     <div class="wrapper">
       <nav>
         <InitializeUser />
-        <RouterLink to="/">Stats</RouterLink>
-        <RouterLink to="/library">Library</RouterLink>
+        <RouterLink to="/" class="nav-link">Stats</RouterLink>
+        <RouterLink to="/library" class="nav-link">Library</RouterLink>
       </nav>
     </div>
   </header>
@@ -18,6 +18,20 @@ import InitializeUser from "./components/InitializeUser.vue";
 </template>
 
 <style>
+html {
+  background-color: #392e5c;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 60px;
+}
+.wrapper {
+  width: 100%;
+}
 .nav-link {
   text-decoration: none;
   background-color: #6441a5;

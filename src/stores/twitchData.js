@@ -17,6 +17,7 @@ export const twitchStore = defineStore({
 			pagination: "",
 			URL: "",
 		},
+		Subscribers: [],
 	}),
 	actions: {
 		async validate(token) {
@@ -76,6 +77,24 @@ export const twitchStore = defineStore({
 					this.Followers.pagination = data.pagination.cursor;
 
 					console.log(this.Followers.followerArr);
+				});
+		},
+		async fetchSubs() {
+			const subURL =
+				"https://api.twitch.tv/helix/subscriptions?broadcaster_id=" +
+				this.User.userId;
+
+			const subRes = fetch(subURL, {
+				headers: new Headers({
+					Authorization: "Bearer " + this.User.token,
+					"Client-ID": "pk0roinew9e83z6qn6ctr7xo7yas15",
+				}),
+			})
+				.then(function (response) {
+					return response.json();
+				})
+				.then((data) => {
+					this.Subscribers.unshift(data.data);
 				});
 		},
 	},

@@ -19,13 +19,16 @@
           <th>Follow Date</th>
         </thead>
         <tbody>
-          <tr v-for="(follower, i) in Followers.followerArr[0]" v-bind:key="i">
+          <tr
+            v-for="(follower, i) in Followers.followerArr[currentPage - 1]"
+            v-bind:key="i"
+          >
             <td>{{ follower.from_login }}</td>
             <td>{{ follower.followed_at }}</td>
           </tr>
         </tbody>
         <Pagination
-          :totalPages="7"
+          :totalPages="25"
           :perPage="20"
           :currentPage="currentPage"
           @pagechanged="onPageChange"
@@ -74,7 +77,6 @@ export default {
   },
   methods: {
     onPageChange(page) {
-      console.log(this.currentPage);
       this.currentPage = page;
     },
   },

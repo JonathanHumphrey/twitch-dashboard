@@ -12,7 +12,7 @@ export const twitchStore = defineStore({
 			token: "",
 		},
 		Followers: {
-			total: 0,
+			total: 1,
 			followerArr: [],
 			pagination: "",
 			URL: "",
@@ -39,45 +39,49 @@ export const twitchStore = defineStore({
 				});
 		},
 		async fetchFollows() {
-			const followUrl =
-				"https://api.twitch.tv/helix/users/follows?to_id=" +
-				this.User.userId +
-				"&after=";
-			let dataBlob = {};
+			for (var i = 0; i < this.Followers.total / 20; i++) {
+				console.log("starting", i);
+				const followUrl =
+					"https://api.twitch.tv/helix/users/follows?to_id=" +
+					this.User.userId +
+					"&after=" +
+					this.Followers.pagination;
+				let dataBlob = {};
 
-			const followRes = await fetch(followUrl, {
-				headers: new Headers({
-					Authorization: "Bearer " + this.User.token,
-					"Client-ID": "pk0roinew9e83z6qn6ctr7xo7yas15",
-				}),
-			})
-				.then(function (response) {
-					return response.json();
+				const followRes = await fetch(followUrl, {
+					headers: new Headers({
+						Authorization: "Bearer " + this.User.token,
+						"Client-ID": "pk0roinew9e83z6qn6ctr7xo7yas15",
+					}),
 				})
-				.then((data) => {
-					const follows = [];
+					.then(function (response) {
+						return response.json();
+					})
+					.then((data) => {
+						const follows = [];
 
-					for (const key in data.data) {
-						const date = data.data[key].followed_at;
+						for (const key in data.data) {
+							const date = data.data[key].followed_at;
 
-						follows.push({
-							from_login: data.data[key].from_login,
-							from_id: data.data[key].from_id,
-							from_name: data.data[key].from_name,
-							to_id: data.data[key].to_id,
-							to_login: data.data[key].to_login,
-							to_name: data.data[key].to_name,
-							followed_at: moment(date).utc().format("MM-DD-YYYY"),
-						});
-					}
+							follows.push({
+								from_login: data.data[key].from_login,
+								from_id: data.data[key].from_id,
+								from_name: data.data[key].from_name,
+								to_id: data.data[key].to_id,
+								to_login: data.data[key].to_login,
+								to_name: data.data[key].to_name,
+								followed_at: moment(date).utc().format("MM-DD-YYYY"),
+							});
+						}
 
-					this.Followers.total = data.total;
-					this.Followers.URL = followUrl + data.pagination.cursor;
-					this.Followers.followerArr.push(follows);
-					this.Followers.pagination = data.pagination.cursor;
+						this.Followers.total = data.total;
+						//this.Followers.URL = followUrl + data.pagination.cursor;
+						this.Followers.followerArr.push(follows);
+						this.Followers.pagination = data.pagination.cursor;
 
-					console.log(this.Followers.followerArr);
-				});
+						console.log(this.Followers.followerArr);
+					});
+			}
 		},
 		async fetchSubs() {
 			const subURL =

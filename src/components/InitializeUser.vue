@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="init-wrapper">
     <a
       href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=pk0roinew9e83z6qn6ctr7xo7yas15&redirect_uri=http://localhost:3000&scope=user:read:follows%20channel:read:subscriptions%20user:read:follows"
       class="link-acc"
@@ -50,7 +50,7 @@ export default {
 };
 </script>
 <style scoped>
-.wrapper {
+.init-wrapper {
   margin-bottom: 5rem;
   width: 10rem;
   position: static;

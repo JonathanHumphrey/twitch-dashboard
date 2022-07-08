@@ -6,8 +6,8 @@ import InitializeUser from "./components/InitializeUser.vue";
 <template>
   <header>
     <div class="wrapper">
+      <InitializeUser />
       <nav>
-        <InitializeUser />
         <RouterLink to="/" class="nav-link">Stats</RouterLink>
         <RouterLink to="/library" class="nav-link">Library</RouterLink>
       </nav>
@@ -29,8 +29,14 @@ html {
   color: #ffffff;
   margin-top: 60px;
 }
+nav {
+  position: absolute;
+  right: 50%;
+  top: 7rem;
+}
 .wrapper {
   width: 100%;
+  height: 5rem;
 }
 .nav-link {
   text-decoration: none;

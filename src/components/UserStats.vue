@@ -27,12 +27,14 @@
             <td>{{ follower.followed_at }}</td>
           </tr>
         </tbody>
-        <Pagination
-          :totalPages="25"
-          :perPage="20"
-          :currentPage="currentPage"
-          @pagechanged="onPageChange"
-        />
+        <div class="pagination">
+          <Pagination
+            :totalPages="Math.floor(Followers.total / 20) + 1"
+            :perPage="20"
+            :currentPage="currentPage"
+            @pagechanged="onPageChange"
+          />
+        </div>
       </table>
       <table>
         <thead>
@@ -90,6 +92,7 @@ export default {
   justify-content: space-between;
   text-align: left;
   background-color: #9146ff;
+  min-height: 50rem;
 }
 .stats-tables {
   display: flex;
@@ -108,18 +111,23 @@ export default {
   justify-content: space-around;
 }
 .general-stats {
-  margin: 1rem;
+  margin-left: 2rem;
   display: flex;
   width: 20rem;
   justify-content: space-between;
+}
+.pagination {
+  position: absolute;
+  left: 17rem;
+  bottom: 0rem;
 }
 table {
   text-align: left;
   table-layout: auto;
   border-collapse: collapse;
   width: 50%;
-  margin: 2rem;
   height: 1rem;
+  margin: 0, 2rem, 10rem;
 }
 hr {
   width: 66%;
@@ -128,5 +136,9 @@ hr {
 }
 th {
   margin-bottom: 10rem;
+}
+
+td {
+  width: 15rem;
 }
 </style>

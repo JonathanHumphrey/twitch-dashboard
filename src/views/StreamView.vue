@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-    <UserStats />
+    <StreamInfo />
   </div>
 </template>
 
 <script setup >
-import UserStats from "../components/UserStats.vue";
+import StreamInfo from "../components/StreamInfo.vue";
 </script>
 <style>
 .wrapper {

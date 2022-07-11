@@ -7,16 +7,25 @@ import InitializeUser from "./components/InitializeUser.vue";
   <header>
     <div class="wrapper">
       <InitializeUser />
-      <nav>
+      <nav v-if="User.valid === true">
         <RouterLink to="/" class="nav-link">Stats</RouterLink>
         <RouterLink to="/library" class="nav-link">Library</RouterLink>
+        <RouterLink to="/stream-info" class="nav-link">Stream Info</RouterLink>
       </nav>
     </div>
   </header>
 
   <RouterView />
 </template>
-
+<script>
+import { twitchStore } from "./stores/twitchData";
+import { mapState } from "pinia";
+export default {
+  computed: {
+    ...mapState(twitchStore, ["User"]),
+  },
+};
+</script>
 <style>
 html {
   background-color: #392e5c;

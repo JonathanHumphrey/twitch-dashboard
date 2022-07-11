@@ -18,6 +18,12 @@ export const twitchStore = defineStore({
 			URL: "",
 		},
 		Subscribers: [],
+		StreamData: {
+			game: "",
+			language: "",
+			title: "",
+			delay: "",
+		},
 	}),
 	actions: {
 		async validate(token) {
@@ -40,7 +46,6 @@ export const twitchStore = defineStore({
 		},
 		async fetchFollows() {
 			for (var i = 0; i < this.Followers.total / 20; i++) {
-				console.log("starting", i);
 				const followUrl =
 					"https://api.twitch.tv/helix/users/follows?to_id=" +
 					this.User.userId +
@@ -78,8 +83,6 @@ export const twitchStore = defineStore({
 						//this.Followers.URL = followUrl + data.pagination.cursor;
 						this.Followers.followerArr.push(follows);
 						this.Followers.pagination = data.pagination.cursor;
-
-						console.log(this.Followers.followerArr);
 					});
 			}
 		},
@@ -99,6 +102,28 @@ export const twitchStore = defineStore({
 				})
 				.then((data) => {
 					this.Subscribers.unshift(data.data);
+				});
+		},
+		async fetchStreamInfo() {
+			const streamURL =
+				"https://api.twitch.tv/helix/channels?broadcaster_id=" +
+				this.User.userId;
+
+			const streamRes = fetch(streamURL, {
+				headers: new Headers({
+					Authorization: "Bearer " + this.User.token,
+					"Client-ID": "pk0roinew9e83z6qn6ctr7xo7yas15",
+				}),
+			})
+				.then(function (response) {
+					return response.json();
+				})
+				.then((data) => {
+					console.log(data.data[0]);
+					this.StreamData.title = data.data[0].title;
+					this.StreamData.game = data.data[0].game_name;
+					this.StreamData.language = data.data[0].broadcaster_language;
+					this.StreamData.delay = data.data[0].delay;
 				});
 		},
 	},

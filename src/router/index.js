@@ -17,6 +17,11 @@ const router = createRouter({
 			// which is lazy-loaded when the route is visited.
 			component: () => import("../views/LibraryView.vue"),
 		},
+		{
+			path: "/stream-info",
+			name: "info",
+			component: () => import("../views/StreamView.vue"),
+		},
 	],
 });
 

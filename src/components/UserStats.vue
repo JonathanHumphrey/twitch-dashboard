@@ -1,5 +1,5 @@
 <template>
-  <div class="content-wrapper">
+  <div class="content-wrapper" v-if="User.valid === true">
     <div class="header">
       <h1>{{ User.username }}</h1>
     </div>
@@ -13,29 +13,31 @@
     </div>
     <hr />
     <div class="stats-tables">
-      <table>
-        <thead>
-          <th>Name</th>
-          <th>Follow Date</th>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(follower, i) in Followers.followerArr[currentPage - 1]"
-            v-bind:key="i"
-          >
-            <td>{{ follower.from_login }}</td>
-            <td>{{ follower.followed_at }}</td>
-          </tr>
-        </tbody>
-        <div class="pagination">
-          <Pagination
-            :totalPages="Math.floor(Followers.total / 20) + 1"
-            :perPage="20"
-            :currentPage="currentPage"
-            @pagechanged="onPageChange"
-          />
-        </div>
-      </table>
+      <div class="follower-stats">
+        <table>
+          <thead>
+            <th>Name</th>
+            <th>Follow Date</th>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(follower, i) in Followers.followerArr[currentPage - 1]"
+              v-bind:key="i"
+            >
+              <td>{{ follower.from_login }}</td>
+              <td>{{ follower.followed_at }}</td>
+            </tr>
+          </tbody>
+          <div class="pagination">
+            <Pagination
+              :totalPages="Math.floor(Followers.total / 20) + 1"
+              :perPage="20"
+              :currentPage="currentPage"
+              @pagechanged="onPageChange"
+            />
+          </div>
+        </table>
+      </div>
       <table>
         <thead>
           <th>Name</th>

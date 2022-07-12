@@ -126,5 +126,20 @@ export const twitchStore = defineStore({
 					this.StreamData.delay = data.data[0].delay;
 				});
 		},
+		async updateStreamInfo(data) {
+			const updateURL =
+				"https://api.twitch.tv/helix/channels?broadcaster_id=" +
+				this.User.userId;
+
+			const updateRes = fetch(updateURL, {
+				method: "PUT",
+				headers: new Headers({
+					Authorization: "Bearer " + this.User.token,
+					"Client-ID": "pk0roinew9e83z6qn6ctr7xo7yas15",
+					"Content-Type": "application/json",
+				}),
+				body: JSON.stringify(data),
+			});
+		},
 	},
 });

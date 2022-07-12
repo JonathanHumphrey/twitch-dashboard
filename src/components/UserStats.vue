@@ -38,20 +38,22 @@
           </div>
         </table>
       </div>
-      <table>
-        <thead>
-          <th>Name</th>
-          <th>Tier</th>
-          <th>Is Gifted</th>
-        </thead>
-        <tbody>
-          <tr v-for="(subs, i) in Subscribers[0]" v-bind:key="i">
-            <td>{{ subs.user_name }}</td>
-            <td>{{ subs.tier / 1000 }}</td>
-            <td>{{ subs.is_gift }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="sub-stats">
+        <table>
+          <thead>
+            <th>Name</th>
+            <th>Tier</th>
+            <th>Is Gifted</th>
+          </thead>
+          <tbody>
+            <tr v-for="(subs, i) in Subscribers[0]" v-bind:key="i">
+              <td>{{ subs.user_name }}</td>
+              <td>{{ subs.tier / 1000 }}</td>
+              <td>{{ subs.is_gift }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -102,6 +104,14 @@ export default {
   margin-top: 0.5rem;
   margin-right: 2rem;
   margin-left: 2rem;
+  justify-content: space-between;
+}
+.follower-stats {
+  margin-left: 5rem;
+  width: 50%;
+}
+.sub-stats {
+  margin-right: 5rem;
 }
 .header {
   margin: 1rem;

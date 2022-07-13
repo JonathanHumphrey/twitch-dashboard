@@ -4,6 +4,9 @@ Simple API interfacing app to display a user's stats about their twitch.tv chann
 
 
 ## Change Log:
+07/13/2022:
+    => layed out a css fix for UserStats
+
 07-11-2022:
     => Added logic to account for if the user has validated the linking of their account
     => Layed groundwork for a component to gather and display data related to current stream such as title, game, tags, and streamers chat

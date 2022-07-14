@@ -4,10 +4,10 @@
   </div>
 </template>
 
-<script setup >
+<script setup>
 import UserStats from "../components/UserStats.vue";
 </script>
-<style>
+<style scoped>
 .wrapper {
   display: inherit;
   align-items: center;

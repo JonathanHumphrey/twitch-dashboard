@@ -24,6 +24,8 @@ export const twitchStore = defineStore({
 			title: "",
 			delay: "",
 		},
+		FollowedStreams: [],
+		ActiveGames: [],
 	}),
 	actions: {
 		async validate(token) {
@@ -124,6 +126,52 @@ export const twitchStore = defineStore({
 					this.StreamData.game = data.data[0].game_name;
 					this.StreamData.language = data.data[0].broadcaster_language;
 					this.StreamData.delay = data.data[0].delay;
+				});
+		},
+		async fetchLiveStreams() {
+			const streamUrl =
+				"https://api.twitch.tv/helix/streams/followed?user_id=" +
+				this.User.userId;
+
+			const streamRes = fetch(streamUrl, {
+				headers: new Headers({
+					Authorization: "Bearer " + this.User.token,
+					"Client-ID": "pk0roinew9e83z6qn6ctr7xo7yas15",
+				}),
+			})
+				.then(function (response) {
+					return response.json();
+				})
+				.then((data) => {
+					const streamDataArray = [];
+					const activeGames = [];
+
+					for (const key in data.data) {
+						streamDataArray.push({
+							id: data.data[key].id,
+							user_id: data.data[key].user_id,
+							user_name: data.data[key].user_name,
+							game_id: data.data[key].game_name,
+							stream_title: data.data[key].title,
+							viewer_count: data.data[key].viewer_count,
+							thumbnail_url: data.data[key].thumbnail_url
+								.replace("{width}", "320")
+								.replace("{height}", "180"),
+							twitch_url: "https://twitch.tv/" + data.data[key].user_name,
+						});
+						if (!activeGames.includes(data.data[key].game_name)) {
+							activeGames.push(data.data[key].game_name);
+						}
+					}
+					const streamData = {
+						streamArr: streamDataArray,
+						activeGames: activeGames,
+					};
+					this.FollowedStreams.unshift(streamDataArray);
+
+					if (this.ActiveGames.length === 0) {
+						this.ActiveGames.unshift(activeGames);
+					}
 				});
 		},
 		async updateStreamInfo(data) {

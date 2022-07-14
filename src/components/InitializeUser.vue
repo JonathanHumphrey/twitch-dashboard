@@ -41,6 +41,7 @@ export default {
       setTimeout(() => {
         store.fetchFollows();
         store.fetchSubs();
+        store.fetchLiveStreams();
         store.fetchStreamInfo();
       }, 500);
     },

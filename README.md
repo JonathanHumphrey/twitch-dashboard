@@ -4,6 +4,9 @@ Simple API interfacing app to display a user's stats about their twitch.tv chann
 
 
 ## Change Log:
+07/14/2022: 
+    => Added in the library of followed streams into the library tab
+
 07/13/2022:
     => layed out a css fix for UserStats
 

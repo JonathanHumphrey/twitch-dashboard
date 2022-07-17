@@ -163,10 +163,6 @@ export const twitchStore = defineStore({
 							activeGames.push(data.data[key].game_name);
 						}
 					}
-					const streamData = {
-						streamArr: streamDataArray,
-						activeGames: activeGames,
-					};
 					this.FollowedStreams.unshift(streamDataArray);
 
 					if (this.ActiveGames.length === 0) {

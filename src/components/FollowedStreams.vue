@@ -18,7 +18,7 @@
         v-show="this.filterValue === 'game'"
         @change="getFilteredGames($event)"
       >
-        <option v-for="(game, i) in activeGames" :value="game" :key="i">
+        <option v-for="(game, i) in ActiveGames[0]" :value="game" :key="i">
           {{ game }}
         </option>
       </select>
@@ -49,7 +49,19 @@ export default {
       //filteredList: this.followedStreams,
     };
   },
-  methods: {},
+  methods: {
+    getFilteredGames(e) {
+      let game = e.target.value;
+      //let filteredActive = this.ActiveGames[0].filter((item) => item === game);
+      let filteredStreams = this.FollowedStreams[0].filter(
+        (item) => item.game_id === game
+      );
+      console.log(filteredStreams);
+    },
+    filterList(e) {
+      this.filterValue = e.target.value;
+    },
+  },
   computed: {
     ...mapState(twitchStore, ["ActiveGames", "FollowedStreams"]),
   },

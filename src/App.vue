@@ -7,11 +7,15 @@ import InitializeUser from "./components/InitializeUser.vue";
   <header>
     <div class="wrapper">
       <InitializeUser />
-      <nav v-if="User.valid === true">
-        <RouterLink to="/" class="nav-link">Stats</RouterLink>
-        <RouterLink to="/library" class="nav-link">Library</RouterLink>
-        <RouterLink to="/stream-info" class="nav-link">Stream Info</RouterLink>
-      </nav>
+      <div class="nav-bar">
+        <nav v-if="User.valid === true">
+          <RouterLink to="/" class="nav-link">Stats</RouterLink>
+          <RouterLink to="/library" class="nav-link">Library</RouterLink>
+          <RouterLink to="/stream-info" class="nav-link"
+            >Stream Info</RouterLink
+          >
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -21,6 +25,12 @@ import InitializeUser from "./components/InitializeUser.vue";
 import { twitchStore } from "./stores/twitchData";
 import { mapState } from "pinia";
 export default {
+  data() {
+    return {
+      selected: "",
+    };
+  },
+  methods: {},
   computed: {
     ...mapState(twitchStore, ["User"]),
   },
@@ -38,14 +48,20 @@ html {
   color: #ffffff;
   margin-top: 60px;
 }
-nav {
-  position: absolute;
-  right: 50%;
-  top: 7rem;
-}
+
 .wrapper {
   width: 100%;
   height: 5rem;
+}
+.nav-bar {
+  margin: auto;
+
+  position: absolute;
+  right: 43%;
+  top: 7rem;
+}
+.router-link-active {
+  background-color: #9146ff;
 }
 .nav-link {
   text-decoration: none;
@@ -57,8 +73,5 @@ nav {
 }
 .nav-link:hover {
   padding: 1rem;
-}
-.nav-linke:active {
-  background-color: #9146ff;
 }
 </style>

@@ -4,6 +4,10 @@ Simple API interfacing app to display a user's stats about their twitch.tv chann
 
 
 ## Change Log:
+07/19/2022
+    => Moved FilterBy logic to it's own component
+    => Made css Updates to center various elements
+
 07/14/2022: 
     => Added in the library of followed streams into the library tab
 

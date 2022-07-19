@@ -25,6 +25,7 @@ export const twitchStore = defineStore({
 			delay: "",
 		},
 		FollowedStreams: [],
+		FilteredStreams: [],
 		ActiveGames: [],
 	}),
 	actions: {
@@ -184,6 +185,9 @@ export const twitchStore = defineStore({
 				}),
 				body: JSON.stringify(data),
 			});
+		},
+		async updateFilteredStreams(list) {
+			this.FilteredStreams.unshift(list);
 		},
 	},
 });

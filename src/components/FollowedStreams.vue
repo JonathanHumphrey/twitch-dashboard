@@ -1,28 +1,6 @@
 <template>
   <div class="content-wrapper">
-    <div>
-      <label for="filterBy"
-        >Filter By:
-        <select name="filterBy" id="filter" @change="filterList($event)">
-          <option value="none" selected disabled hidden>
-            Select an Option
-          </option>
-          <option value="game">Game</option>
-          <option value="hi-lo">View Count (Descending)</option>
-          <option value="lo-hi">View Count (Ascending)</option>
-        </select>
-      </label>
-      <select
-        name="gameFilter"
-        id="activeGames"
-        v-show="this.filterValue === 'game'"
-        @change="getFilteredGames($event)"
-      >
-        <option v-for="(game, i) in ActiveGames[0]" :value="game" :key="i">
-          {{ game }}
-        </option>
-      </select>
-    </div>
+    <FilterBy />
     <div class="content" v-for="(stream, i) in FollowedStreams[0]" :key="i">
       <h4>{{ stream.user_name }}</h4>
       <div class="stream-info">
@@ -40,6 +18,7 @@
 <script>
 import { mapState } from "pinia";
 import { twitchStore } from "../stores/twitchData";
+import FilterBy from "./followed-streams/FilterBy.vue";
 
 export default {
   data() {
@@ -49,22 +28,11 @@ export default {
       //filteredList: this.followedStreams,
     };
   },
-  methods: {
-    getFilteredGames(e) {
-      let game = e.target.value;
-      //let filteredActive = this.ActiveGames[0].filter((item) => item === game);
-      let filteredStreams = this.FollowedStreams[0].filter(
-        (item) => item.game_id === game
-      );
-      console.log(filteredStreams);
-    },
-    filterList(e) {
-      this.filterValue = e.target.value;
-    },
-  },
+  methods: {},
   computed: {
     ...mapState(twitchStore, ["ActiveGames", "FollowedStreams"]),
   },
+  components: { FilterBy },
 };
 </script>
 <style scoped>

@@ -1,38 +1,35 @@
 <template>
   <div class="content-wrapper">
-    <h1>{{ User.username }}</h1>
+    <h1 id="user" @change="test()">{{ User.username }}</h1>
     <h2>Title - {{ StreamData.title }}</h2>
     <h2>Game - {{ StreamData.game }}</h2>
-    <div class="update-form">
-      <form action="" method="post">
-        <input type="text" class="text" id="title" placeholder="Title" />
-        <input type="text" class="text" id="game" placeholder="Game" />
-        <input type="submit" class="submit" @click="submit($event)" />
-      </form>
-    </div>
+  </div>
+
+  <div>
+    <iframe id="twitch-chat-embed" src="" height="500" width="350"> </iframe>
   </div>
 </template>
 
 <script>
+//            return `https://www.twitch.tv/embed/${this.channel}/chat?parent=${window.location.hostname}&darkpopout`;
+
 import { twitchStore } from "../stores/twitchData";
 import { mapState } from "pinia";
+import { onMounted } from "vue";
+
 export default {
   methods: {
-    submit(event) {
-      const store = twitchStore();
-      event.preventDefault();
-      let title = document.getElementById("title");
-      let game = document.getElementById("game");
-
-      const dataBlob = {
-        title: title.value,
-        game: game.value,
-      };
-      store.updateStreamInfo(dataBlob);
+    test() {
+      console.log("shid");
     },
   },
   computed: {
-    ...mapState(twitchStore, ["User", "StreamData"]),
+    ...mapState(twitchStore, ["User", "StreamData", "chatURL"]),
+  },
+  data() {
+    return {
+      username: document.getElementById("user"),
+    };
   },
 };
 </script>

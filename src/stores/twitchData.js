@@ -27,6 +27,7 @@ export const twitchStore = defineStore({
 		FollowedStreams: [],
 		FilteredStreams: [],
 		ActiveGames: [],
+		chatURL: "",
 	}),
 	actions: {
 		async validate(token) {
@@ -45,6 +46,13 @@ export const twitchStore = defineStore({
 					this.User.token = token;
 					this.User.valid = true;
 					console.log(this.User);
+
+					this.chatURL =
+						"https://www.twitch.tv/embed/" +
+						this.User.username +
+						"/chat?parent=localhost";
+
+					console.log(this.chatURL);
 				});
 		},
 		async fetchFollows() {

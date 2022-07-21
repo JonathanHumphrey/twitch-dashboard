@@ -1,5 +1,5 @@
 <template>
-  <div class="init-wrapper">
+  <div class="init-wrapper" v-if="User.userId === 0">
     <a
       href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=pk0roinew9e83z6qn6ctr7xo7yas15&redirect_uri=http://localhost:3000&scope=user:read:follows%20channel:read:subscriptions%20user:read:follows%20channel:manage:broadcast"
       class="link-acc"
@@ -8,26 +8,19 @@
     <button
       class="link-button"
       @click="validateToken()"
-      v-if="User.userId !== 0"
-    >
-      Refresh Content
-    </button>
-    <button
-      class="link-button"
-      @click="validateToken()"
-      v-if="User.userId === 0"
     >
       Display Content
     </button>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { mapState } from "pinia";
 import { twitchStore } from "../stores/twitchData";
 
 export default {
   methods: {
+    // Initial validation request parsed through a token from the URL, then a request is made on the store to the API
     validateToken() {
       const store = twitchStore();
       let url = window.location.hash;
@@ -35,9 +28,9 @@ export default {
       let token = split[0].split("=");
       let actualToken = token[1];
 
-      console.log(actualToken);
       store.validate(actualToken);
 
+      // Timeout of half a second put in place to account for API request time, with a little space on either side in case load times increase
       setTimeout(() => {
         store.fetchFollows();
         store.fetchSubs();
@@ -55,8 +48,8 @@ export default {
 .init-wrapper {
   margin-bottom: 5rem;
   width: 10rem;
-  position: static;
-  left: 0;
+  margin: auto;
+  margin-top: 5rem;
 }
 .link-button {
   text-decoration: none;

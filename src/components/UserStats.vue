@@ -58,7 +58,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Pagination from "../components/Pagination.vue";
 
 import { mapState } from "pinia";

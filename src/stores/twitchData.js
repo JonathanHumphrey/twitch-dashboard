@@ -28,8 +28,10 @@ export const twitchStore = defineStore({
 		FilteredStreams: [],
 		ActiveGames: [],
 		chatURL: "",
+		streamURL: ""
 	}),
 	actions: {
+		// Initial validation request made to the API. Assembles the data into a User object and saves it in state
 		async validate(token) {
 			const res = await fetch("https://id.twitch.tv/oauth2/validate", {
 				headers: new Headers({
@@ -52,9 +54,12 @@ export const twitchStore = defineStore({
 						this.User.username +
 						"/chat?parent=localhost";
 
-					console.log(this.chatURL);
+					
+					this.streamURL = "https://player.twitch.tv/?channel=" + this.User.username + "&parent=localhost&muted=true";
+					console.log(this.streamURL);
 				});
 		},
+		// Fetches the users that follow the User
 		async fetchFollows() {
 			for (var i = 0; i < this.Followers.total / 20; i++) {
 				const followUrl =
@@ -91,12 +96,12 @@ export const twitchStore = defineStore({
 						}
 
 						this.Followers.total = data.total;
-						//this.Followers.URL = followUrl + data.pagination.cursor;
 						this.Followers.followerArr.push(follows);
 						this.Followers.pagination = data.pagination.cursor;
 					});
 			}
 		},
+		// Fetchs the subsribers to the User's channel
 		async fetchSubs() {
 			const subURL =
 				"https://api.twitch.tv/helix/subscriptions?broadcaster_id=" +
@@ -115,6 +120,7 @@ export const twitchStore = defineStore({
 					this.Subscribers.unshift(data.data);
 				});
 		},
+		// Fetchs the User's current stream information
 		async fetchStreamInfo() {
 			const streamURL =
 				"https://api.twitch.tv/helix/channels?broadcaster_id=" +
@@ -137,6 +143,7 @@ export const twitchStore = defineStore({
 					this.StreamData.delay = data.data[0].delay;
 				});
 		},
+		// Fetchs the User's followed live streams
 		async fetchLiveStreams() {
 			const streamUrl =
 				"https://api.twitch.tv/helix/streams/followed?user_id=" +
@@ -178,24 +185,6 @@ export const twitchStore = defineStore({
 						this.ActiveGames.unshift(activeGames);
 					}
 				});
-		},
-		async updateStreamInfo(data) {
-			const updateURL =
-				"https://api.twitch.tv/helix/channels?broadcaster_id=" +
-				this.User.userId;
-
-			const updateRes = fetch(updateURL, {
-				method: "PUT",
-				headers: new Headers({
-					Authorization: "Bearer " + this.User.token,
-					"Client-ID": "pk0roinew9e83z6qn6ctr7xo7yas15",
-					"Content-Type": "application/json",
-				}),
-				body: JSON.stringify(data),
-			});
-		},
-		async updateFilteredStreams(list) {
-			this.FilteredStreams.unshift(list);
 		},
 	},
 });

@@ -18,7 +18,6 @@ import InitializeUser from "./components/InitializeUser.vue";
       </div>
     </div>
   </header>
-
   <RouterView />
 </template>
 <script>
@@ -46,7 +45,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ffffff;
-  margin-top: 60px;
+  
 }
 
 .wrapper {
@@ -58,7 +57,7 @@ html {
 
   position: absolute;
   right: 43%;
-  top: 7rem;
+  top: 4rem;
 }
 .router-link-active {
   background-color: #9146ff;

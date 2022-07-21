@@ -2,16 +2,16 @@
   <div class="content-wrapper">
     <FilterBy />
     <div class="content" v-for="(stream, i) in FollowedStreams[0]" :key="i">
-      <h4>{{ stream.user_name }}</h4>
+      <h4 class="streamer-name">{{ stream.user_name }}</h4>
       <div class="stream-info">
-        <h5>{{ stream.stream_title }}</h5>
+        <h4>{{ stream.stream_title }}</h4>
+        <hr/>
         <h5 class="game-name">Game: {{ stream.game_id }}</h5>
         <h5 class="view-count">Viewers: {{ stream.viewer_count }}</h5>
       </div>
-
-      <a href="https://twitch.tv/" target="_blank">
+      <span @click="openWindow(stream.twitch_url)">
         <img :src="`${stream.thumbnail_url}`" alt="" />
-      </a>
+      </span>
     </div>
   </div>
 </template>
@@ -25,10 +25,13 @@ export default {
     return {
       filterValue: "none",
       gameFilter: "",
-      //filteredList: this.followedStreams,
     };
   },
-  methods: {},
+  methods: {
+    openWindow(url){
+      window.open(url)
+    }
+  },
   computed: {
     ...mapState(twitchStore, ["ActiveGames", "FollowedStreams"]),
   },
@@ -46,7 +49,7 @@ export default {
   border-radius: 2rem;
   margin: 0.5rem;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   text-align: left;
   background-color: #9146ff;
 }
@@ -59,7 +62,7 @@ export default {
 .view-count {
   text-align: left;
 }
-h4 {
+.streamer-name{
   margin: 2rem;
 
   width: 30%;
@@ -67,5 +70,8 @@ h4 {
 img {
   margin: 1rem;
   border-radius: 2rem;
+}
+span{
+  cursor: pointer;
 }
 </style>

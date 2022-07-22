@@ -54,10 +54,7 @@ html {
 }
 .nav-bar {
   margin: auto;
-
-  position: absolute;
-  right: 43%;
-  top: 4rem;
+  margin-top: 2rem;
 }
 .router-link-active {
   background-color: #9146ff;

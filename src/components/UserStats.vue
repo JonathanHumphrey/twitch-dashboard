@@ -104,14 +104,18 @@ export default {
   margin-top: 0.5rem;
   margin-right: 2rem;
   margin-left: 2rem;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .follower-stats {
-  margin-left: 5rem;
-  width: 50%;
+  display: flex;
+  justify-content: center;
+  width: 33%;
 }
 .sub-stats {
-  margin-right: 5rem;
+  display: inherit;
+  justify-content: center;
+  width: 33%;
+
 }
 .header {
   margin: 1rem;
@@ -130,16 +134,16 @@ export default {
 }
 .pagination {
   position: absolute;
-  left: 17rem;
-  bottom: 0rem;
+  left: 10rem;
+  bottom: 3rem;
 }
 table {
-  text-align: left;
+  width: 100%;
   table-layout: auto;
   border-collapse: collapse;
-  width: 50%;
   height: 1rem;
   margin: 0, 2rem, 10rem;
+  
 }
 hr {
   width: 66%;
@@ -149,8 +153,9 @@ hr {
 th {
   margin-bottom: 10rem;
 }
-
-td {
-  width: 15rem;
+td{
+  margin-right: 15rem;
+  width: 50%;
 }
+
 </style>

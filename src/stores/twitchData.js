@@ -28,7 +28,7 @@ export const twitchStore = defineStore({
 		FilteredStreams: [],
 		ActiveGames: [],
 		chatURL: "",
-		streamURL: ""
+		streamURL: "",
 	}),
 	actions: {
 		// Initial validation request made to the API. Assembles the data into a User object and saves it in state
@@ -54,8 +54,10 @@ export const twitchStore = defineStore({
 						this.User.username +
 						"/chat?parent=localhost";
 
-					
-					this.streamURL = "https://player.twitch.tv/?channel=" + this.User.username + "&parent=localhost&muted=true";
+					this.streamURL =
+						"https://player.twitch.tv/?channel=" +
+						this.User.username +
+						"&parent=localhost&muted=true";
 					console.log(this.streamURL);
 				});
 		},

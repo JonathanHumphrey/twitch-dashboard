@@ -1,5 +1,5 @@
 <template>
-  <div class="component-wrapper" >
+  <div class="component-wrapper">
     <h1 id="user">{{ User.username }}</h1>
     <h2>Title - {{ StreamData.title }}</h2>
     <h2>Game - {{ StreamData.game }}</h2>
@@ -10,14 +10,21 @@
           src="{{streamURL}}"
           height="480"
           width="854"
-          allowfullscreen>
+          allowfullscreen
+        >
         </iframe>
       </div>
       <div class="twitch-chat">
-        <iframe id="twitch-chat-embed" src="{{chatURL}}" height="500" width="350"> </iframe>
+        <iframe
+          id="twitch-chat-embed"
+          src="{{chatURL}}"
+          height="500"
+          width="350"
+        >
+        </iframe>
       </div>
     </div>
-    <button class="refresh" @click="updateContent()">&#8635</button>
+    <button class="refresh" @click="updateContent()">&#8635;</button>
   </div>
 </template>
 
@@ -26,7 +33,6 @@ import { twitchStore } from "../stores/twitchData";
 import { mapState } from "pinia";
 
 export default {
-  
   methods: {
     // This method serves to change the source programattically since iframe elements cannot take a variable as the source
     updateContent() {
@@ -55,9 +61,8 @@ export default {
   background-color: #9146ff;
   min-height: 50rem;
   position: relative;
-
 }
-.content-wrapper{
+.content-wrapper {
   display: flex;
   margin: auto;
   justify-content: center;
@@ -66,7 +71,7 @@ export default {
   border-radius: 2rem;
   padding-top: 2rem;
 }
-.refresh{
+.refresh {
   position: absolute;
   top: 2rem;
   right: 2rem;

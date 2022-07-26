@@ -1,11 +1,11 @@
 <template>
   <div class="content-wrapper">
-    <FilterBy />
-    <div class="content" v-for="(stream, i) in FollowedStreams[0]" :key="i">
+    <FilterBy :filteredList="filteredList" />
+    <div class="content" v-for="(stream, i) in filteredList" :key="i">
       <h4 class="streamer-name">{{ stream.user_name }}</h4>
       <div class="stream-info">
         <h4>{{ stream.stream_title }}</h4>
-        <hr/>
+        <hr />
         <h5 class="game-name">Game: {{ stream.game_id }}</h5>
         <h5 class="view-count">Viewers: {{ stream.viewer_count }}</h5>
       </div>
@@ -23,14 +23,16 @@ import FilterBy from "./followed-streams/FilterBy.vue";
 export default {
   data() {
     return {
-      filterValue: "none",
-      gameFilter: "",
+      filteredList: [],
     };
   },
+  created() {
+    console.log(this.filteredList);
+  },
   methods: {
-    openWindow(url){
-      window.open(url)
-    }
+    openWindow(url) {
+      window.open(url);
+    },
   },
   computed: {
     ...mapState(twitchStore, ["ActiveGames", "FollowedStreams"]),
@@ -62,7 +64,7 @@ export default {
 .view-count {
   text-align: left;
 }
-.streamer-name{
+.streamer-name {
   margin: 2rem;
 
   width: 30%;
@@ -71,7 +73,7 @@ img {
   margin: 1rem;
   border-radius: 2rem;
 }
-span{
+span {
   cursor: pointer;
 }
 </style>

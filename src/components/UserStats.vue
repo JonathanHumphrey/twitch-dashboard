@@ -115,7 +115,6 @@ export default {
   display: inherit;
   justify-content: center;
   width: 33%;
-
 }
 .header {
   margin: 1rem;
@@ -143,7 +142,6 @@ table {
   border-collapse: collapse;
   height: 1rem;
   margin: 0, 2rem, 10rem;
-  
 }
 hr {
   width: 66%;
@@ -153,9 +151,8 @@ hr {
 th {
   margin-bottom: 10rem;
 }
-td{
+td {
   margin-right: 15rem;
   width: 50%;
 }
-
 </style>

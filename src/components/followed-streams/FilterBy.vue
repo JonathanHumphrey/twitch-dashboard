@@ -37,25 +37,33 @@ export default {
     return {
       filterValue: "none",
       gameFilter: "",
-      filteredList: [],
     };
   },
   methods: {
     getFilteredGames(e) {
-      this.filteredList = [];
+      const store = twitchStore();
+      let filteredList = store.FollowedStreams[0];
 
-      if (document.getElementById("filter").value === "lo-hi") {
-        this.filteredList = this.FollowedStreams[0];
-        this.filteredList.reverse();
-      } else if (document.getElementById("filter").value === "hi-lo") {
-        this.filteredList = this.FollowedStreams[0];
-      } else if (document.getElementById("filter").value === "game") {
-        this.filteredList = this.FollowedStreams[0].filter(
+      // Sorts OR Filters the original Followed Streams array stored in state
+      if (this.filterValue === "lo-hi") {
+        filteredList = store.FollowedStreams[0].sort(
+          (a, b) => parseFloat(a.viewer_count) - parseFloat(b.viewer_count)
+        );
+
+        store.FilteredStreams = filteredList;
+      } else if (this.filterValue === "hi-lo") {
+        filteredList = store.FollowedStreams[0].sort(
+          (a, b) => parseFloat(b.viewer_count) - parseFloat(a.viewer_count)
+        );
+        store.FilteredStreams = filteredList;
+      } else if (this.filterValue === "game") {
+        filteredList = store.FollowedStreams[0].filter(
           (item) =>
             item.game_id === document.getElementById("active-games").value
         );
+
+        store.FilteredStreams = filteredList;
       }
-      console.log(this.filteredList);
     },
     filterList(e) {
       this.filterValue = e.target.value;

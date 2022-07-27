@@ -4,7 +4,10 @@ Simple API interfacing app to display a user's stats about their twitch.tv chann
 
 
 ## Change Log:
-07/19/2022
+07/27/2022:
+    => Filtering works properly now to either sort or filter 
+    => Final styling pass completed
+07/19/2022:
     => Moved FilterBy logic to it's own component
     => Made css Updates to center various elements
 

@@ -47,7 +47,6 @@ export const twitchStore = defineStore({
 					this.User.userId = data.user_id;
 					this.User.token = token;
 					this.User.valid = true;
-					console.log(this.User);
 
 					this.chatURL =
 						"https://www.twitch.tv/embed/" +
@@ -58,7 +57,6 @@ export const twitchStore = defineStore({
 						"https://player.twitch.tv/?channel=" +
 						this.User.username +
 						"&parent=localhost&muted=true";
-					console.log(this.streamURL);
 				});
 		},
 		// Fetches the users that follow the User
@@ -138,7 +136,6 @@ export const twitchStore = defineStore({
 					return response.json();
 				})
 				.then((data) => {
-					console.log(data.data[0]);
 					this.StreamData.title = data.data[0].title;
 					this.StreamData.game = data.data[0].game_name;
 					this.StreamData.language = data.data[0].broadcaster_language;

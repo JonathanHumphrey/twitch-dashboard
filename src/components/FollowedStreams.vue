@@ -1,7 +1,7 @@
 <template>
   <div class="content-wrapper">
-    <FilterBy :filteredList="filteredList" />
-    <div class="content" v-for="(stream, i) in filteredList" :key="i">
+    <FilterBy />
+    <div class="content" v-for="(stream, i) in FilteredStreams" :key="i">
       <h4 class="streamer-name">{{ stream.user_name }}</h4>
       <div class="stream-info">
         <h4>{{ stream.stream_title }}</h4>
@@ -21,21 +21,13 @@ import { twitchStore } from "../stores/twitchData";
 import FilterBy from "./followed-streams/FilterBy.vue";
 
 export default {
-  data() {
-    return {
-      filteredList: [],
-    };
-  },
-  created() {
-    console.log(this.filteredList);
-  },
   methods: {
     openWindow(url) {
       window.open(url);
     },
   },
   computed: {
-    ...mapState(twitchStore, ["ActiveGames", "FollowedStreams"]),
+    ...mapState(twitchStore, ["ActiveGames", "FilteredStreams"]),
   },
   components: { FilterBy },
 };

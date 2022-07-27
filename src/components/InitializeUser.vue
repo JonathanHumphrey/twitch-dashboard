@@ -1,7 +1,7 @@
 <template>
   <div class="init-wrapper" v-if="User.userId === 0">
-    <a
-      href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=pk0roinew9e83z6qn6ctr7xo7yas15&redirect_uri=http://localhost:3000&scope=user:read:follows%20channel:read:subscriptions%20user:read:follows%20channel:manage:broadcast"
+    <a 
+      href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=pk0roinew9e83z6qn6ctr7xo7yas15&redirect_uri=https://astounding-blancmange-fb88d6.netlify.app/&scope=user:read:follows%20channel:read:subscriptions%20user:read:follows%20channel:manage:broadcast"
       class="link-acc"
       >Link
     </a>

@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import moment from "moment";
-import { stringifyQuery } from "vue-router";
 
 export const twitchStore = defineStore({
 	id: "twitchStore",
@@ -42,7 +41,6 @@ export const twitchStore = defineStore({
 					return response.json();
 				})
 				.then((data) => {
-					//console.log(data)
 					this.User.username = data.login;
 					this.User.userId = data.user_id;
 					this.User.token = token;

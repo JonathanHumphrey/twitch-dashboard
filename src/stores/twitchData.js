@@ -49,12 +49,12 @@ export const twitchStore = defineStore({
 					this.chatURL =
 						"https://www.twitch.tv/embed/" +
 						this.User.username +
-						"/chat?parent=localhost";
+						"/chat?parent=astounding-blancmange-fb88d6.netlify.app";
 
 					this.streamURL =
 						"https://player.twitch.tv/?channel=" +
 						this.User.username +
-						"&parent=localhost&muted=true";
+						"&parent=astounding-blancmange-fb88d6.netlify.app&muted=true";
 				});
 		},
 		// Fetches the users that follow the User
